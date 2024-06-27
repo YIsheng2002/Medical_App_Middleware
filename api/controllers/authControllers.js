@@ -29,11 +29,11 @@ const register = async (req, res) => {
   };
   try {
     await createTable(userSchema);
-    const userAlreadyExists = await checkRecordExists("user", "username", username);
+    const userAlreadyExists = await checkRecordExists("users", "username", username);
     if (userAlreadyExists) {
       res.status(409).json({ error: "Username already exists" });
     } else {
-      await insertRecord("user", user);
+      await insertRecord("users", user);
       res.status(201).json({ message: "User created successfully!" });
     }
   } catch (error) {
@@ -49,7 +49,7 @@ const login = async (req, res) => {
   }
 
   try {
-    const existingUser = await checkRecordExists("user", "username", username);
+    const existingUser = await checkRecordExists("users", "username", username);
 
     if (existingUser) {
       if (!existingUser.password) {

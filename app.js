@@ -8,6 +8,7 @@ const authRoutes = require('./api/routes/authRoute');
 const appointmentRoutes = require('./api/routes/appointmentRoutes'); // Import the appointment routes
 const patientRoutes = require('./api/routes/patientRoutes');
 const medicalRecordRoutes = require('./api/routes/medicalRecordRoutes');
+const doctorRoutes = require('./api/routes/doctorRoutes');
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use('/api', authRoutes);
 app.use('/api/appointments', appointmentRoutes); // Use the appointment routes
 app.use('/patient', patientRoutes);
 app.use('/medicalRecord', medicalRecordRoutes);
+app.use('/doctor', doctorRoutes);
 
 connectDB();
 

@@ -33,10 +33,11 @@ const findByID = async (req, res) => {
 };
 
 const create = async (req, res) => {
+    const { patientID } = req.params;
     const medicalRecordData = req.body;
     try {
-      console.log('Handling POST /medicalRecord/add', medicalRecordData);
-      const newMedicalRecord = await createMedicalRecord(medicalRecordData);
+      console.log(`Handling POST /medicalRecord/${patientID}/add`, medicalRecordData);
+      const newMedicalRecord = await createMedicalRecord(patientID, medicalRecordData);
       console.log('Sending response:', newMedicalRecord);
       res.status(201).json(newMedicalRecord);
     } catch (error) {
@@ -60,10 +61,10 @@ const update = async (req, res) => {
 };
 
 const deleted = async (req, res) => {
-    const { patientID, medicalRecordID } = req.params;
+    const { medicalRecordID } = req.params;
     try {
-      console.log(`Handling DELETE /medicalRecord/${patientID}/${medicalRecordID}/delete`);
-      await deleteMedicalRecord(patientID, medicalRecordID);
+      console.log(`Handling DELETE /medicalRecord/${medicalRecordID}/delete`);
+      await deleteMedicalRecord(medicalRecordID);
       console.log('Sending response: No Content');
       res.status(202).send();
     } catch (error) {

@@ -2,10 +2,10 @@ const axios = require('axios');
 
 const API_BASE_URL = 'http://localhost:8080/medicalRecord'; // Replace with the base URL of the external API
 
-const createMedicalRecord = async (medicalRecordData) => {
+const createMedicalRecord = async (patientID, medicalRecordData) => {
     try {
         console.log('Creating new medical record in external API', medicalRecordData);
-        const response = await axios.post(`${API_BASE_URL}/add`, medicalRecordData);
+        const response = await axios.post(`${API_BASE_URL}/${patientID}/add`, medicalRecordData);
         console.log('Received response:', response.data);
         return response.data;
     } catch (error) {
@@ -38,10 +38,10 @@ const getMedicalRecordById = async ( patientID, medicalRecordID) => {
     }
 };
 
-const deleteMedicalRecord = async (patientID, medicalRecordID) => {
+const deleteMedicalRecord = async (medicalRecordID) => {
     try {
         console.log(`Deleting medical record ${medicalRecordID} in external API`);
-        const response = await axios.delete(`${API_BASE_URL}/${patientID}/${medicalRecordID}/delete`);
+        const response = await axios.delete(`${API_BASE_URL}/${medicalRecordID}/delete`);
         console.log('Received response:', response.data);
         return response.data;
     } catch (error) {

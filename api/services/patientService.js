@@ -38,10 +38,10 @@ const updatePatient = async (patientData) => {
   }
 };
 
-const deletePatient = async (patientData) => {
+const deletePatient = async (patientID) => {
   try {
-    console.log(`Deleting patient ${patientData} in external API`);
-    const response = await axios.delete(`${API_BASE_URL}/patient/delete`);
+    console.log(`Deleting patient ${patientID} in external API`);
+    const response = await axios.delete(`${API_BASE_URL}/delete/${patientID}`);
     console.log('Received response:', response.data);
     return response.data;
   } catch (error) {

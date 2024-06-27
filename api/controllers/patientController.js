@@ -36,7 +36,7 @@ const update = async (req, res) => {
     const patientData = req.body;
     try {
       console.log(`Handling PATCH /patient/update`, patientData);
-      const updatedpatient = await updatePatient(patientID, patientData);
+      const updatedpatient = await updatePatient(patientData);
       console.log('Sending response:', updatedpatient);
       res.status(200).json(updatedpatient);
     } catch (error) {
@@ -46,10 +46,10 @@ const update = async (req, res) => {
 };
   
 const deleted = async (req, res) => {
-    const patientData = req.body;
+    const { patientID } = req.params;
     try {
       console.log(`Handling DELETE /patient/delete`);
-      await deletePatient(patientData);
+      await deletePatient(patientID);
       console.log('Sending response: No Content');
       res.status(202).send();
     } catch (error) {
